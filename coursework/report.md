@@ -48,6 +48,6 @@ Volkswagen обеспечивает основной объём продаж к�
 
 ## Код и итоговый файл
 
-[Скрипт очистки](https://github.com/lapin-sh/practicum-data-preprocessing-analysis/blob/20571a1a9982bd4cdaa6cc4f07d51aefddffc2b3/coursework/clean_autokz.py) · [Ноутбук с расчётами и графиками](https://github.com/lapin-sh/practicum-data-preprocessing-analysis/blob/20571a1a9982bd4cdaa6cc4f07d51aefddffc2b3/coursework/autokz2019_analysis.ipynb) · [Очищенный CSV](https://raw.githubusercontent.com/lapin-sh/practicum-data-preprocessing-analysis/20571a1a9982bd4cdaa6cc4f07d51aefddffc2b3/coursework/autokz2019_cleaned.csv)
+[Скрипт очистки](https://github.com/lapin-sh/practicum-data-preprocessing-analysis/blob/main/coursework/clean_autokz.py) · [Ноутбук с расчётами и графиками](https://github.com/lapin-sh/practicum-data-preprocessing-analysis/blob/main/coursework/autokz2019_analysis.ipynb) · [Очищенный CSV](https://raw.githubusercontent.com/lapin-sh/practicum-data-preprocessing-analysis/main/coursework/autokz2019_cleaned.csv)
 
 Скрипт требует Python, pandas и NumPy. Из папки проекта запустите `python clean_autokz.py`. Он использует локальный исходный CSV, если он есть, или скачивает официальный файл. Скрипт сохраняет CSV в UTF-8 с заголовками, датами в формате ГГГГ-ММ-ДД и десятичной точкой. Для запуска ноутбука также нужны Jupyter и Matplotlib.
