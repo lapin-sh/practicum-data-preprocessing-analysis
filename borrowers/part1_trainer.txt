@@ -1,0 +1,104 @@
+Исследование надёжности заёмщиков. Часть 1
+
+Заполни существующие ячейки с кодом в ноутбуке первой части на платформе.
+В нём 18 заданий и 22 ячейки с кодом. Задания 1, 15, 16 и 18 занимают
+по две ячейки, остальные — по одной. Выполни ячейки по порядку, затем
+используй кнопку «Проверить задание». Путь к данным задан для тренажёра.
+
+# Задание 1
+# Первая ячейка — импорт
+import pandas as pd
+
+# Вторая ячейка — чтение данных
+data = pd.read_csv('/datasets/data.csv')
+
+# Задание 2
+data.head(20)
+
+# Задание 3
+data.info()
+
+# Задание 4
+data.isna().sum()
+
+# Задание 5
+for income_type in data['income_type'].unique():
+    same_type = data['income_type'] == income_type
+    missing_income = data['total_income'].isna()
+    median_income = data.loc[same_type, 'total_income'].median()
+    data.loc[same_type & missing_income, 'total_income'] = median_income
+
+# Задание 6
+data['days_employed'] = data['days_employed'].abs()
+
+# Задание 7
+data.groupby('income_type')['days_employed'].median()
+
+# Задание 8
+data['children'].unique()
+
+# Задание 9
+data = data.loc[~data['children'].isin([-1, 20])].copy()
+
+# Задание 10
+data['children'].unique()
+
+# Задание 11
+for income_type in data['income_type'].unique():
+    same_type = data['income_type'] == income_type
+    missing_tenure = data['days_employed'].isna()
+    median_tenure = data.loc[same_type, 'days_employed'].median()
+    data.loc[same_type & missing_tenure, 'days_employed'] = median_tenure
+
+# Задание 12
+data.isna().sum()
+
+# Задание 13
+data['total_income'] = data['total_income'].astype(int)
+
+# Задание 14
+data['education'] = data['education'].str.lower()
+
+# Задание 15
+# Первая ячейка — подсчёт
+data.duplicated().sum()
+
+# Вторая ячейка — удаление
+data = data.drop_duplicates()
+
+# Задание 16
+# Первая ячейка — определение функции
+def categorize_income(income):
+    if 0 <= income <= 30_000:
+        return 'E'
+    if 30_001 <= income <= 50_000:
+        return 'D'
+    if 50_001 <= income <= 200_000:
+        return 'C'
+    if 200_001 <= income <= 1_000_000:
+        return 'B'
+    if income >= 1_000_001:
+        return 'A'
+    raise ValueError(f'Доход вне заданных диапазонов: {income}')
+
+# Вторая ячейка — применение функции
+data['total_income_category'] = data['total_income'].apply(categorize_income)
+
+# Задание 17
+data['purpose'].unique()
+
+# Задание 18
+# Первая ячейка — определение функции
+def categorize_purpose(purpose):
+    if 'автом' in purpose:
+        return 'операции с автомобилем'
+    if 'жил' in purpose or 'недвиж' in purpose:
+        return 'операции с недвижимостью'
+    if 'свад' in purpose:
+        return 'проведение свадьбы'
+    if 'образов' in purpose:
+        return 'получение образования'
+    raise ValueError(f'Не удалось определить категорию цели: {purpose}')
+
+# Вторая ячейка — применение функции
+data['purpose_category'] = data['purpose'].apply(categorize_purpose)
